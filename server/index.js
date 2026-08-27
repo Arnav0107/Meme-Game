@@ -22,10 +22,9 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const server = http.createServer(app);
 
-// Enable CORS
-const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
+// Enable CORS with dynamic origin matching to prevent production CORS blocks
 app.use(cors({
-  origin: [clientUrl, 'http://localhost:5173', 'http://127.0.0.1:5173'],
+  origin: (origin, callback) => callback(null, true),
   credentials: true
 }));
 
@@ -40,7 +39,7 @@ await seedGameData();
 // Socket.io initialization
 const io = new Server(server, {
   cors: {
-    origin: [clientUrl, 'http://localhost:5173', 'http://127.0.0.1:5173'],
+    origin: (origin, callback) => callback(null, true),
     methods: ['GET', 'POST'],
     credentials: true
   }

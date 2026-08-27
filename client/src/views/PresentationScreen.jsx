@@ -4,10 +4,10 @@ import Chart from '../components/Chart';
 import confetti from 'canvas-confetti';
 
 const COIN_COLORS = {
-  FROG: '#00ff87',
-  PIZZA: '#ffbe0b',
-  STUPA: '#00e5ff',
-  EXAM: '#ff3e6c'
+  RAVI: '#00ff87',
+  CHUNAID: '#ffbe0b',
+  VARUN: '#00e5ff',
+  ARJUN: '#ff3e6c'
 };
 
 export default function PresentationScreen() {

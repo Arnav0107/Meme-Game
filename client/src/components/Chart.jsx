@@ -66,9 +66,18 @@ export default function Chart({ priceHistory = [], coinColor = '#00e5ff' }) {
     ctx.lineTo(points[points.length - 1].x, height - padding);
     ctx.closePath();
 
+    // Safety check: Canvas addColorStop cannot process CSS var variables
+    let finalColor = coinColor || '#00e5ff';
+    if (finalColor.startsWith('var(')) {
+      if (finalColor.includes('--neon-green')) finalColor = '#00ff87';
+      else if (finalColor.includes('--neon-red')) finalColor = '#ff3e6c';
+      else if (finalColor.includes('--neon-gold')) finalColor = '#ffbe0b';
+      else finalColor = '#00e5ff'; // Fallback to cyan
+    }
+
     const areaGrad = ctx.createLinearGradient(0, padding, 0, height - padding);
-    areaGrad.addColorStop(0, `${coinColor}20`); // 12% opacity
-    areaGrad.addColorStop(1, `${coinColor}00`); // transparent
+    areaGrad.addColorStop(0, `${finalColor}20`); // 12% opacity
+    areaGrad.addColorStop(1, `${finalColor}00`); // transparent
     ctx.fillStyle = areaGrad;
     ctx.fill();
 
@@ -78,9 +87,9 @@ export default function Chart({ priceHistory = [], coinColor = '#00e5ff' }) {
     for (let i = 1; i < points.length; i++) {
       ctx.lineTo(points[i].x, points[i].y);
     }
-    ctx.strokeStyle = coinColor;
+    ctx.strokeStyle = finalColor;
     ctx.lineWidth = 2.5;
-    ctx.shadowColor = coinColor;
+    ctx.shadowColor = finalColor;
     ctx.shadowBlur = 8;
     ctx.stroke();
 

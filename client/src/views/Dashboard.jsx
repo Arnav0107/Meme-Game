@@ -5,12 +5,11 @@ import Leaderboard from '../components/Leaderboard';
 import TransactionHistory from '../components/TransactionHistory';
 import Modal from '../components/Modal';
 
-// Help helper for coin color mappings
 const COIN_COLORS = {
-  FROG: '#00ff87', // green
-  PIZZA: '#ffbe0b', // gold/yellow
-  STUPA: '#00e5ff', // cyan
-  EXAM: '#ff3e6c'  // pink-red
+  RAVI: '#00ff87', // green
+  CHUNAID: '#ffbe0b', // gold/yellow
+  VARUN: '#00e5ff', // cyan
+  ARJUN: '#ff3e6c'  // pink-red
 };
 
 export default function Dashboard() {

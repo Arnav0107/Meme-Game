@@ -1,0 +1,17 @@
+{
+  "name": "meme-coin-market-root",
+  "version": "1.0.0",
+  "description": "Interactive Web3-themed classroom simulator game",
+  "scripts": {
+    "install-all": "npm install && npm install --prefix server && npm install --prefix client",
+    "server": "npm run start --prefix server",
+    "client": "npm run dev --prefix client",
+    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "build": "npm run build --prefix client",
+    "start": "cross-env NODE_ENV=production node server/index.js"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3"
+  }
+}

@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useSocket } from '../context/SocketContext';
 import confetti from 'canvas-confetti';
 
-const BACKEND_URL = import.meta.env.DEV ? 'http://localhost:5000' : window.location.origin;
+const BACKEND_URL = import.meta.env.VITE_API_URL || 
+  ((window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') 
+    ? 'http://localhost:5000' 
+    : window.location.origin);
 
 export default function WinnerScreen() {
   const { leaderboard } = useSocket();

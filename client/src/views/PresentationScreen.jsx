@@ -10,6 +10,11 @@ const COIN_COLORS = {
   ARJUN: '#ff3e6c'
 };
 
+const BACKEND_URL = import.meta.env.VITE_API_URL || 
+  ((window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') 
+    ? 'http://localhost:5000' 
+    : window.location.origin);
+
 export default function PresentationScreen() {
   const {
     gameState,
@@ -25,7 +30,7 @@ export default function PresentationScreen() {
   // Fetch all teams for the lobby view
   const fetchTeams = async () => {
     try {
-      const res = await fetch(`${import.meta.env.DEV ? 'http://localhost:5000' : window.location.origin}/api/leaderboard`);
+      const res = await fetch(`${BACKEND_URL}/api/leaderboard`);
       const data = await res.json();
       if (Array.isArray(data)) {
         setLobbyTeams(data);

@@ -2,6 +2,11 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useSocket } from '../context/SocketContext';
 import Modal from '../components/Modal';
 
+const BACKEND_URL = import.meta.env.VITE_API_URL || 
+  ((window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') 
+    ? 'http://localhost:5000' 
+    : window.location.origin);
+
 export default function AdminDashboard({ adminToken, onLogout }) {
   const {
     gameState,
@@ -230,7 +235,7 @@ export default function AdminDashboard({ adminToken, onLogout }) {
     const res = await adminCommand(`teams/${deleteConfirmTeam._id}`, {}, adminToken, 'DELETE');
     // Note: our controller DELETE endpoint maps to DELETE method, let's execute properly
     try {
-      const response = await fetch(`${import.meta.env.DEV ? 'http://localhost:5000' : window.location.origin}/api/admin/teams/${deleteConfirmTeam._id}`, {
+      const response = await fetch(`${BACKEND_URL}/api/admin/teams/${deleteConfirmTeam._id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${adminToken}` }
       });

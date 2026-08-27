@@ -7,7 +7,7 @@
     "server": "npm run start --prefix server",
     "client": "npm run dev --prefix client",
     "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
-    "build": "npm run build --prefix client",
+    "build": "npm run install-all && npm run build --prefix client",
     "start": "cross-env NODE_ENV=production node server/index.js"
   },
   "dependencies": {
